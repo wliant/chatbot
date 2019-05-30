@@ -1,6 +1,12 @@
 [
     {
-        "id": "mtech_is",
-        "fee": "S$20,939.90 to S$22,095.50"
+        "graduate-programme": "mtech-is",
+        "answer": "S$20,939.90 to S$22,095.50",
+        "application-group": "sg"
+    },
+    {
+        "graduate-programme": "mtech-is",
+        "answer": "S$55,319.00 to S$59,171.00",
+        "application-group": "non-sg"
     }
 ]
