@@ -5,6 +5,13 @@ from pydialogflow_fulfillment import DialogflowResponse
 from pydialogflow_fulfillment import SimpleResponse, Confirmation, OutputContexts, Suggestions
 import GetCourseDescription
 import GetGraduateProgrammeFee
+import GetCourseLearningOutcome
+import GetCourseDuration
+import GetApplicationDeadline
+import GetCourseAdmissionRequirements
+import GetCourseApplicationProcess
+import GetCourseCareerProspects
+import GetCourseModules
 
 
 app = Flask(__name__)
@@ -26,6 +33,20 @@ def webhook():
     print(intent_name)
     if intent_name == "GetCourseDescription":
         return make_response(GetCourseDescription.process(req))
+    if intent_name == "GetCourseLearningOutcome":
+        return make_response(GetCourseLearningOutcome.process(req))
+    if intent_name == "GetCourseDuration":
+        return make_response(GetCourseDuration.process(req))
+    if intent_name == "GetApplicationDeadline":
+        return make_response(GetApplicationDeadline.process(req))
+    if intent_name == "GetCourseAdmissionRequirements":
+        return make_response(GetCourseAdmissionRequirements.process(req))
+    if intent_name == "GetCourseApplicationProcess":
+        return make_response(GetCourseApplicationProcess.process(req)) 
+    if intent_name == "GetCourseCareerProspects":
+        return make_response(GetCourseCareerProspects.process(req))
+    if intent_name == "GetCourseModules":
+        return make_response(GetCourseModules.process(req))
     if intent_name == "Default Welcome Intent":
         res = DialogflowResponse("this is a sample response")
         return make_response(res.get_final_response())
@@ -58,7 +79,7 @@ def webhook():
         respose_text = "weather"
 
     else:
-        respose_text = "No intent matched"
+        respose_text = "No intent matched from fullfilment code."
     # Branching ends here
 
     # Finally sending this response to Dialogflow.
