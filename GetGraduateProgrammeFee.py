@@ -2,7 +2,8 @@ from pydialogflow_fulfillment import DialogflowResponse
 from pydialogflow_fulfillment import SimpleResponse, Confirmation, OutputContexts, Suggestions
 import json
 
-CONTEXT_ASK_PROGRAMME = "GetGraduateProgrammeFee-ask-programme"
+CONTEXT_ASK_PROGRAMME = "GetGraduateProgrammeFee-followup"
+
 DATA_FILE = "data/GetGraduateProgrammeFee.json"
 
 with open(DATA_FILE, 'r') as infile:
@@ -14,15 +15,27 @@ def has_params(theKey, params):
 def askProgramme(req):
     res = DialogflowResponse("What is the graduate programme you are looking at?")
     res.add(OutputContexts(req.get_project_id(), req.get_session_id(),CONTEXT_ASK_PROGRAMME,5,req.get_paramters()))
-    print(res.get_final_response())
     return res.get_final_response()
-
+def askApplicationGroup(req):
+    res = DialogflowResponse("Are you Singapore/PR or Non Singaporean?")
+    res.add(OutputContexts(req.get_project_id(), req.get_session_id(),CONTEXT_ASK_PROGRAMME,5,req.get_paramters()))
+    return res.get_final_response()
 def process(req):
     params = req.get_paramters()
+    try:
+        for con in req.get_ouputcontext_list():
+            o_params = con["parameters"]
+            for x in o_params:
+                params[x] = o_params[x]
+    except:
+        None
+
     print(params)
-    #if has_params("graduate-programme", params):
-    #    return askProgramme(req)
+    if not has_params("graduate-programme", params):
+        return askProgramme(req)
     
+    if not has_params("application-group", params):
+        return askApplicationGroup(req)
     application_group = "" if "application-group" not in params else params["application-group"] 
     graduate_programme = "" if "graduate-programme" not in params else params["graduate-programme"]
 

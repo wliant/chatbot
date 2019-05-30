@@ -2,7 +2,7 @@ from pydialogflow_fulfillment import DialogflowResponse
 from pydialogflow_fulfillment import SimpleResponse, Confirmation, OutputContexts, Suggestions
 import json
 DATA_FILE = "data/GetCourseApplicationProcess.json"
-with open(DATA_FILE, 'r') as infile:
+with open(DATA_FILE, 'r', encoding="utf8") as infile:
     data = json.load(infile)
 
 def process(req):

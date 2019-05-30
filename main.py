@@ -47,21 +47,7 @@ def webhook():
         return make_response(GetCourseCareerProspects.process(req))
     if intent_name == "GetCourseModules":
         return make_response(GetCourseModules.process(req))
-    if intent_name == "Default Welcome Intent":
-        res = DialogflowResponse("this is a sample response")
-        return make_response(res.get_final_response())
-    if intent_name == "General":
-        print(str(req.get_session()))
-        print(str(req.get_response_id()))
-        res = DialogflowResponse("This is a text response")
-        res.add(Suggestions(["Help","About","Sync"]))
-        params = req.get_paramters()
-        res.add(OutputContexts(PROJECT_ID, req.get_session_id(),"has_graduate_programme",5,params))
-        print(res.get_final_response())
-        #__init__(self,project_id,session_id,context_name,context_life_span, context_parameters):
-        return make_response(res.get_final_response())
-    if intent_name=="GetGraduateProgrammeFee":
-        params = req.get_paramters()
+    if intent_name=="GetGraduateProgrammeFee" or intent_name =="GetGraduateProgrammeFee-ReplyProgramme" or intent_name == "GetGraduateProgrammeFee-ReplyApplicationGroup":
         return make_response(GetGraduateProgrammeFee.process(req))
     if intent_name=="GetGraduateProgrammeFee2":
         print(str(req.get_session()))
